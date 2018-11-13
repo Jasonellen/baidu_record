@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta content="always" name="referrer">
+    <title>百度录音方案</title>
+</head>
+
+<body>
+    <div class='begin'>开始</div>
+    <div class='end'>结束</div>
+    <script src="./jquery.min.js"></script>
+    <script src='./voice.js'></script>
+    <script>
+       var t =  Recorder.init({ url: "http://vse.baidu.com/echo.fcgi"});
+
+        t.done(function(t) {
+                t.onresult(function(e){
+                    console.log(e.content.item[0],555)
+                })
+                t.onfinish(function(t) {
+                    var e = t.content.item[0]
+                    console.log(t.content.item[0],6666)
+                });
+                Recorder.log({ q: "resolve" })
+            }).fail(function() { Recorder.log({ q: "reject" }), alert("涓嶈兘鑾峰緱楹﹀厠椋庣殑鏉冮檺") }), Recorder.log({ q: "start" })
+        $('.begin').on('click',function(){
+            __record.start()
+        })
+        $('.end').on('click',function(){
+            __record.stop()
+        })
+
+    </script>
+</body>
+
+</html>
